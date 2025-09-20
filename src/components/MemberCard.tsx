@@ -1,52 +1,83 @@
-import { Card } from "../components/ui/card"; // from shadcn/ui
-import { Button } from "../components/ui/button";
-import { Member } from "../data/members";
-import { getInitials } from "../utils/helpers";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Member } from "@/data/members";
+import { MapPin, Mail, Briefcase } from "lucide-react";
 
-type Props = {
+interface MemberCardProps {
   member: Member;
-  onSelect: (m: Member) => void;
+  onClick: () => void;
+}
+
+const getInitials = (name: string): string =>
+  name.split(" ").map((n) => n[0]).join("").toUpperCase();
+
+const getRoleColor = (role: string): string => {
+  switch (role.toLowerCase()) {
+    case "developer":
+      return "bg-primary/15 text-primary border-2 border-primary/30";
+    case "designer":
+      return "bg-accent/30 text-accent-foreground border-2 border-accent/40";
+    case "manager":
+      return "bg-secondary/80 text-secondary-foreground border-2 border-secondary/50";
+    default:
+      return "bg-muted text-muted-foreground border-2";
+  }
 };
 
-export default function MemberCard({ member, onSelect }: Props) {
+export const MemberCard = ({ member, onClick }: MemberCardProps) => {
   return (
     <Card
-      className="hover:shadow-md transition cursor-pointer p-4"
-      onClick={() => onSelect(member)}
+      className="card-hover hover-lift cursor-pointer animate-fade-in group corporate-card"
+      onClick={onClick}
     >
-      <div className="flex items-center gap-4">
-        <div className="w-12 h-12 rounded-full bg-indigo-500 flex items-center justify-center text-white font-semibold">
-          {getInitials(member.name)}
-        </div>
-        <div className="flex-1">
-          <div className="flex items-center justify-between">
-            <h3 className="font-semibold">{member.name}</h3>
-            <span
-              className={`text-xs px-2 py-0.5 rounded-full ${
-                member.status === "Active"
-                  ? "bg-green-100 text-green-700"
-                  : "bg-red-100 text-red-700"
-              }`}
-            >
-              {member.status}
-            </span>
+      <CardContent className="p-7">
+        <div className="flex items-start space-x-5">
+          {/* Avatar */}
+          <div className="flex-shrink-0">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center text-primary-foreground font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+              {getInitials(member.name)}
+            </div>
           </div>
-          <p className="text-sm text-slate-500 dark:text-slate-300">
-            {member.role}
-          </p>
-        </div>
-      </div>
 
-      <div className="mt-3 flex items-center gap-2">
-        <Button
-          onClick={(e) => {
-            e.stopPropagation();
-            onSelect(member);
-          }}
-        >
-          View
-        </Button>
-      </div>
+          {/* Member Info */}
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-xl font-bold text-foreground truncate group-hover:text-primary transition-colors">
+                {member.name}
+              </h3>
+              <Badge
+                className={`px-3 py-1.5 rounded-lg font-medium text-sm ${
+                  member.status === "Active" ? "status-active" : "status-inactive"
+                }`}
+              >
+                {member.status}
+              </Badge>
+            </div>
+
+            <div className="space-y-3">
+              <Badge variant="outline" className={`px-4 py-1.5 rounded-lg text-sm ${getRoleColor(member.role)}`}>
+                {member.role}
+              </Badge>
+
+              <div className="flex items-center text-base text-muted-foreground">
+                <Mail className="w-5 h-5 mr-3" />
+                <span className="truncate">{member.email}</span>
+              </div>
+
+              <div className="flex items-center text-base text-muted-foreground">
+                <MapPin className="w-5 h-5 mr-3" />
+                <span>{member.location}</span>
+              </div>
+            </div>
+
+            {/* Projects count */}
+            <div className="mt-5 flex items-center text-sm font-semibold text-muted-foreground">
+              <Briefcase className="w-4 h-4 mr-2" />
+              <span>{member.projects.length} active project{member.projects.length !== 1 ? "s" : ""}</span>
+            </div>
+          </div>
+        </div>
+      </CardContent>
     </Card>
   );
-}
+};

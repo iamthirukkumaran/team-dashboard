@@ -1,3 +1,400 @@
+@tailwind base;
+@tailwind components;
 @tailwind utilities;
-@tailwind utilities;
-@tailwind utilities;
+
+
+/* Corporate Team Dashboard Design System */
+@layer base {
+  :root {
+    /* Background & Text */
+    --background: 222 47% 11%;          /* Deep navy blue */
+    --foreground: 210 40% 98%;          /* Light blue text */
+
+    /* Card & Popover */
+    --card: 217 33% 17%;                /* Dark slate blue */
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Primary & Secondary */
+    --primary: 210 80% 55%;             /* Corporate blue */
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 210 80% 45%;
+
+    --secondary: 215 26% 24%;           /* Dark blue-gray */
+    --secondary-foreground: 210 40% 98%;
+
+    /* Muted */
+    --muted: 215 26% 24%;
+    --muted-foreground: 215 20% 65%;
+
+    /* Accent */
+    --accent: 200 80% 55%;              /* Bright teal-blue */
+    --accent-foreground: 0 0% 100%;
+
+    /* Status Colors */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 72% 45%;             /* Professional green */
+    --success-foreground: 0 0% 100%;
+    --success-light: 142 72% 35%;
+
+    --warning: 38 92% 50%;              /* Corporate amber */
+    --warning-foreground: 0 0% 100%;
+    --warning-light: 38 92% 40%;
+
+    /* UI Elements */
+    --border: 215 28% 25%;
+    --input: 215 28% 25%;
+    --ring: 210 80% 55%;
+
+    /* Radius */
+    --radius: 0.75rem;
+
+    /* Sidebar */
+    --sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 210 80% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 26% 24%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 215 28% 25%;
+    --sidebar-ring: 210 80% 55%;
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 210 80% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 210 80% 45%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 200 80% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 72% 45%;
+    --success-foreground: 0 0% 100%;
+    --success-light: 142 76% 95%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --warning-light: 38 92% 95%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 210 80% 55%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 210 80% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 210 80% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* Custom scrollbar for corporate feel */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/40 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/60;
+  }
+
+  /* Improved text visibility */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Status Badge Variants - Larger */
+  .status-active {
+    @apply bg-success-light text-success-foreground border-2 border-success/40 text-sm px-3 py-1.5;
+  }
+  
+  .status-inactive {
+    @apply bg-warning-light text-warning-foreground border-2 border-warning/40 text-sm px-3 py-1.5;
+  }
+
+  /* Corporate Glass Effect */
+  .corporate-glass {
+    @apply bg-white/15 backdrop-blur-lg border-2 border-white/20;
+  }
+  
+  .dark .corporate-glass {
+    @apply bg-black/25 backdrop-blur-lg border-2 border-white/10;
+  }
+
+  /* Professional Gradients */
+  .gradient-primary {
+    @apply bg-gradient-to-br from-primary to-primary/90;
+  }
+
+  .gradient-card {
+    @apply bg-gradient-to-br from-card to-card/95;
+  }
+
+  .gradient-accent {
+    @apply bg-gradient-to-br from-accent to-accent/90;
+  }
+
+  /* Animation Classes */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Hover Effects */
+  .hover-lift {
+    @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-2;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-xl hover:border-primary/50;
+  }
+
+  /* Corporate Button Styles - Larger */
+  .btn-corporate {
+    @apply bg-primary text-primary-foreground px-8 py-3 rounded-xl font-semibold text-lg
+           transition-all duration-200 hover:bg-primary-hover hover:shadow-lg 
+           focus:ring-4 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background;
+  }
+
+  /* Professional Table Styles */
+  .corporate-table {
+    @apply w-full border-collapse text-base;
+  }
+  
+  .corporate-table th {
+    @apply bg-muted text-muted-foreground font-semibold p-4 text-left border-b-2 border-border text-lg;
+  }
+  
+  .corporate-table td {
+    @apply p-4 border-b border-border;
+  }
+  
+  .corporate-table tr:hover {
+    @apply bg-muted/60;
+  }
+
+  /* Enhanced card styles - Larger */
+  .corporate-card {
+    @apply bg-card border-2 border-border rounded-2xl shadow-corporate-lg overflow-hidden p-6;
+  }
+
+  /* Professional input styles - Larger */
+  .corporate-input {
+    @apply bg-input border-2 border-border rounded-xl px-5 py-3 text-foreground text-base
+           focus:outline-none focus:ring-4 focus:ring-primary/40 focus:border-transparent 
+           transition-all duration-200;
+  }
+
+  /* Section headers - Larger */
+  .section-header {
+    @apply text-3xl font-bold text-foreground mb-8 pb-4 border-b-2 border-border;
+  }
+
+  /* Improved visibility utilities */
+  .text-enhanced {
+    @apply text-lg leading-relaxed;
+  }
+
+  .text-large {
+    @apply text-xl leading-relaxed;
+  }
+
+  .text-xlarge {
+    @apply text-2xl leading-relaxed;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Professional focus styles */
+.focus-corporate {
+  @apply focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background;
+}
+
+/* Corporate shadow system - Enhanced */
+.shadow-corporate {
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-corporate-lg {
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2), 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.shadow-corporate-xl {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25), 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Professional typography enhancements */
+.corporate-heading {
+  @apply font-bold tracking-tight;
+}
+
+.corporate-heading-xl {
+  @apply text-4xl md:text-5xl font-extrabold tracking-tighter;
+}
+
+.corporate-heading-lg {
+  @apply text-3xl md:text-4xl font-bold tracking-tight;
+}
+
+.corporate-text {
+  @apply leading-relaxed text-muted-foreground text-lg;
+}
+
+.corporate-text-large {
+  @apply leading-relaxed text-muted-foreground text-xl;
+}
+
+/* Data visualization colors for charts */
+.data-viz-primary { background-color: hsl(210, 80%, 55%); }
+.data-viz-secondary { background-color: hsl(200, 80%, 55%); }
+.data-viz-success { background-color: hsl(142, 72%, 45%); }
+.data-viz-warning { background-color: hsl(38, 92%, 50%); }
+.data-viz-accent { background-color: hsl(215, 26%, 24%); }
+
+/* Enhanced glass effect for modern corporate look */
+.glass-panel {
+  @apply bg-white/10 backdrop-blur-xl border-2 border-white/20 rounded-2xl;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.dark .glass-panel {
+  @apply bg-black/30 backdrop-blur-xl border-2 border-white/10;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Subtle pulse animation for loading states */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Professional transition effects */
+.transition-corporate {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced focus states for accessibility */
+.focus-visible-corporate {
+  @apply focus:outline-none focus:ring-4 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .corporate-card {
+    @apply border-2;
+  }
+  
+  .status-active,
+  .status-inactive {
+    @apply border-2;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

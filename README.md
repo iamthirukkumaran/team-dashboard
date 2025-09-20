@@ -31,5 +31,5 @@ A **React + Vite** application showcasing team members, with search, filter, and
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/iamthirukkumaran/corporate-team-dashboard.git
-cd corporate-team-dashboard
+git clone https://github.com/iamthirukkumaran/team-dashboard.git
+cd team-dashboard
